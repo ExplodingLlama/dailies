@@ -17,10 +17,12 @@ class DailyPage extends React.Component {
       });
   }
   render() {
-    <div>
-      {this.state.daily.heading}
-      <img src={this.state.daily.photo_link} />
-    </div>;
+    return (
+      <div>
+        {this.state.daily.heading}
+        <img src={this.state.daily.photo_link} />
+      </div>
+    );
   }
 }
 
