@@ -8,7 +8,7 @@ class DailyPage extends React.Component {
   };
   componentDidMount() {
     axios
-      .get(`/getDaily/${this.props.dailyId}`)
+      .get(`/getDaily/${this.props.dailyId || ""}`)
       .then(response => {
         this.setState({ daily: response.data });
       })
