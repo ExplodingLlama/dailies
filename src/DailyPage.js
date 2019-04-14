@@ -1,0 +1,27 @@
+import React, { Component } from "react";
+import axios from "axios";
+
+class DailyPage extends React.Component {
+  state = {
+    daily: {}
+    // feed: { image: {} }
+  };
+  componentDidMount() {
+    axios
+      .get(`/getDaily/${this.props.dailyId}`)
+      .then(response => {
+        this.setState({ daily: response.data });
+      })
+      .catch(err => {
+        console.log("error", err);
+      });
+  }
+  render() {
+    <div>
+      {this.state.daily.heading}
+      <img src={this.state.daily.photo_link} />
+    </div>;
+  }
+}
+
+export default DailyPage;

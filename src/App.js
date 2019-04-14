@@ -1,26 +1,35 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from "react";
+import { BrowserRouter, StaticRouter, Route, Link } from "react-router-dom";
+import axios from "axios";
+import DailyPage from "./DailyPage";
 
-class App extends Component {
+axios.defaults.baseURL = "https://us-central1-dailies-f17d7.cloudfunctions.net";
+
+const DailyPageWrapper = ({ match }) => {
+  return <DailyPage dailyId={match.params.dailyId} />;
+};
+
+const Router = props => {
+  if (typeof window !== "undefined") {
+    return <BrowserRouter>{props.children}</BrowserRouter>;
+  } else {
+    return (
+      <StaticRouter location={props.path} context={{}}>
+        {props.children}
+      </StaticRouter>
+    );
+  }
+};
+
+class App extends React.Component {
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
-      </div>
+      <Router path={this.props.path}>
+        <div>
+          <Route exact path="/" component={DailyPage} />
+          <Route path="/:dailyId" component={DailyPageWrapper} />
+        </div>
+      </Router>
     );
   }
 }
