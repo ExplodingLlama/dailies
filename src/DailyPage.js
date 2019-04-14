@@ -19,8 +19,10 @@ class DailyPage extends React.Component {
   render() {
     return (
       <div>
-        {this.state.daily.heading}
-        <img src={this.state.daily.photo_link} />
+        <div style={{ fontSize: 42, width: "100%", justifyContent: "center" }}>
+          {this.state.daily.heading}
+        </div>
+        <img style={{ width: "100%" }} src={this.state.daily.photo_link} />
       </div>
     );
   }
